@@ -8,6 +8,7 @@ import Cartcounter from './Components/UI/Cartcounter';
 
 const App = () => {
 
+  const [cartCount, setcartCount] = useState(0);
   return (
     <React.Fragment>
       <header className="App-header">
