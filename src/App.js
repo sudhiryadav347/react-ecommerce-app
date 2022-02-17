@@ -1,25 +1,26 @@
+import React, {useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { Nav, NavDropdown, Row, Col } from 'react-bootstrap';
-import Productrow from './Components/Products/Productrow';
 import Product from './Components/Products/Product';
 import Cartcounter from './Components/UI/Cartcounter';
 // import './App.css';
 
 const App = () => {
+
   return (
-    <div className="App">
+    <React.Fragment>
       <header className="App-header">
         <Container className="p-3">
           <Row>
             <Col lg="10" className="logo-wrapper">
-              <h1 className="header mb-0">React-Bootstrap</h1>
+              <h1 className="header mb-0">React-Commerce</h1>
               <p className=" small text-muted">
                 React.js Project Using Bootstrap - Sudhir
               </p>
             </Col>
             <Col className="cart-counter d-flex align-items-center justify-content-end">
-              <Cartcounter itemCount="0" />
+              <Cartcounter itemCount={cartCount} />
             </Col>
           </Row>
           {/* Navbar starts*/}
@@ -58,7 +59,7 @@ const App = () => {
           <Product />
         </Container>
       </body>
-    </div>
+    </React.Fragment>
   );
 };
 

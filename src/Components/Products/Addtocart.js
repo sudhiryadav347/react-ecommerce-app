@@ -5,7 +5,7 @@ class Addtocart extends Component {
 
     constructor(props){
         super(props);
-        this.state = {label: 'Add to Cart'}
+        this.state = {label: 'Add to Cart' }
         this.AddedToCart = this.AddedToCart.bind(this);
 
     }
@@ -13,7 +13,7 @@ class Addtocart extends Component {
   AddedToCart(param) {
     // console.log('Added to the cart! ' + params);
     // console.log(this);
-    this.setState({label: param });
+    this.setState({label: param});
   }
 
   render() {
