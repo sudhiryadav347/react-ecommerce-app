@@ -11,7 +11,7 @@ class Addtocart extends Component {
 
   AddedToCart(param) {
     this.setState((prevState) => ({ label: param, counter: +1 }));
-    const resetAddtoCartBtn = setTimeout(()=>{ this.setState({label: 'Add to Cart'})}, 1000);
+    setTimeout(()=>{ this.setState({label: 'Add to Cart'})}, 1000);
     this.props.itemsCounter(this.state.counter);
   }
 
