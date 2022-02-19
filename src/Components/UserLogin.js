@@ -4,8 +4,11 @@ import { Form, Button, Col, Card, Alert } from 'react-bootstrap';
 const Userlogin = (props) => {
   // const [EnteredEmail, setEnteredEmail] = useState('');
   // const [emailIsValid, setEmailIsValid] = useState();
-  const [UserInfo, setUserInfo] = useState({email: '', password: ''});
-  const [FieldValidity, setFieldValidity] = useState({email:'', password:''});
+  const [UserInfo, setUserInfo] = useState({ email: '', password: '' });
+  const [FieldValidity, setFieldValidity] = useState({
+    email: '',
+    password: '',
+  });
   // const [EnteredPassword, setEnteredPassword] = useState('');
   // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setformIsValid] = useState(false);
@@ -18,24 +21,27 @@ const Userlogin = (props) => {
 
   const emailChangeHandler = (event) => {
     // setEnteredEmail(event.target.value);
-    setUserInfo({...UserInfo, email: event.target.value});
+    setUserInfo({ ...UserInfo, email: event.target.value });
   };
 
   const passwordChangeHandler = (event) => {
     // setEnteredPassword(event.target.value);
-    setUserInfo({...UserInfo, password: event.target.value});
+    setUserInfo({ ...UserInfo, password: event.target.value });
   };
 
   const validateEmailHandler = () => {
     // setEmailIsValid(EnteredEmail.includes('@'));
     // setEmailIsValid(UserInfo.email.includes('@'));
-    setFieldValidity({...FieldValidity, email: UserInfo.email.includes('@')})
+    setFieldValidity({ ...FieldValidity, email: UserInfo.email.includes('@') });
   };
 
   const validatePasswordHandler = () => {
     // setPasswordIsValid(EnteredPassword.trim().length > 6);
     // setPasswordIsValid(UserInfo.password.trim().length > 6);
-    setFieldValidity({...FieldValidity, password: UserInfo.password.includes('@')})
+    setFieldValidity({
+      ...FieldValidity,
+      password: UserInfo.password.includes('@'),
+    });
   };
 
   const submitHandler = (event) => {
@@ -45,12 +51,16 @@ const Userlogin = (props) => {
 
   return (
     <Col md={{ span: 6 }}>
-      {!props.showAlert && <Alert variant="danger">
-        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-        <p>
-          This is just a practice login form and not connected to any database. Please use sudhir@gmail.com as email and 1234567 as password to test.
-        </p>
-      </Alert>}
+      {!props.showAlert && (
+        <Alert variant="danger">
+          <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+          <p>
+            This is just a practice login form and not connected to any
+            database. Please use sudhir@gmail.com as email and 1234567 as
+            password to test.
+          </p>
+        </Alert>
+      )}
       <Card className="mt-3">
         <Card.Body>
           <Form onSubmit={submitHandler} noValidate>
