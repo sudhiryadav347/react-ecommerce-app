@@ -105,7 +105,7 @@ const Product = (props) => {
                   src={product.image}
                   alt=""
                   className='p-5'
-                  style={{ maxHeight: '300px', width: 'auto !important' }}
+                  style={{ maxHeight: '400px', width: 'auto !important' }}
                 />
                 <Card.Body>
                   <h1 className="display-6 fs-3 text">${product.price}</h1>
