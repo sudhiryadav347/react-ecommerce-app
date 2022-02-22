@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Row } from "react-bootstrap";
 import Masonry from "react-masonry-css";
 import './ProductRow.css';
 
