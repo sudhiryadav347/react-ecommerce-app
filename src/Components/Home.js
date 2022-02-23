@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Col } from "react-bootstrap";
 import { Card } from "react-bootstrap";
-import Addtocart from "./Addtocart";
-import Productrow from "./Productrow";
+import Addtocart from "./Products/Addtocart";
+import Productrow from "./Products/Productrow";
 import axios from "axios";
-import Rate from "../UI/Rate";
+import Rate from "./UI/Rate";
 
-// const productImageLocation = 'Assets/Images/';
-
-const Product = (props) => {
+const Home = (props) => {
 	const [ProductData, setProductData] = useState([]);
 	useEffect(() => {
 		axios.get("https://fakestoreapi.com/products").then(function (response) {
@@ -60,4 +58,4 @@ const Product = (props) => {
 	);
 };
 
-export default Product;
+export default Home;
