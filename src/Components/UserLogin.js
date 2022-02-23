@@ -51,7 +51,7 @@ const Userlogin = (props) => {
 		// setPasswordIsValid(UserInfo.password.trim().length > 6);
 		setFieldValidity({
 			...FieldValidity,
-			password: UserInfo.password.includes("@"),
+			password: UserInfo.password.trim().length > 6
 		});
 	};
 
