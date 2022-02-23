@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Masonry from "react-masonry-css";
-import './ProductRow.css';
+import "./ProductRow.css";
 
 const breakpointColumnsObj = {
-    default: 4,
-    1100: 3,
-    700: 2,
-    500: 1
-  };
+	default: 4,
+	1100: 3,
+	700: 2,
+	500: 1,
+};
 
 class Productrow extends Component {
 	render(props) {
