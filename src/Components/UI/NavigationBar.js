@@ -1,40 +1,88 @@
-import React from "react";
-import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import React, { Fragment } from "react";
+import {
+	Navbar,
+	Nav,
+	NavDropdown,
+	Container,
+	nav,
+	li,
+	hr,
+} from "react-bootstrap";
+import reactDom from "react-dom";
 import { Link, NavLink } from "react-router-dom";
 
 const Navigationbar = (props) => {
 	return (
 		<>
-			{/* Navbar starts*/}
-			<Navbar bg="light" expand="lg" className="my-3">
-				<Container>
-					{/* <Navbar.Brand href="#home">Bootstrap React</Navbar.Brand> */}
-					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="me-auto">
-							<Nav.Link>
-								<NavLink to="/">Home</NavLink>
-							</Nav.Link>
-							<Nav.Link>
-								<NavLink to="/about">About</NavLink>
-							</Nav.Link>
-						</Nav>
-					</Navbar.Collapse>
+			<nav className="navbar navbar-expand-lg navbar-light bg-light">
+				<div className="container">
+					<button
+						className="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span className="navbar-toggler-icon"></span>
+					</button>
+					<div className="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
+							<li className="nav-item">
+								<NavLink to="/" className="nav-link">
+									Home
+								</NavLink>
+							</li>
+							<li className="nav-item">
+								<NavLink to="/about" className="nav-link">
+									About
+								</NavLink>
+							</li>
+						</ul>
 
-					<Nav className="me-auto className='align-right'">
-						{props.whetherLoggedIn ? (
-							<Nav.Link onClick={props.onLogout}>
-								<NavLink to="/">Logout</NavLink>
-								<NavLink to="/dashboard">Dashboard</NavLink>
-							</Nav.Link>
-						) : (
-							<Nav.Link>
-								<NavLink to="/login">Login</NavLink>
-							</Nav.Link>
-						)}
-					</Nav>
-				</Container>
-			</Navbar>
+						<ul class="navbar-nav me-4 mb-2 mb-lg-0">
+							{props.whetherLoggedIn ? (
+								<React.Fragment>
+									<li className="nav-item">
+										<NavLink to="/dashboard" className="nav-link">
+											Dashboard
+										</NavLink>
+									</li>
+
+									<li className="nav-item">
+										<NavLink
+											to="/"
+											className="nav-link"
+											onClick={props.onLogout}
+										>
+											Logout
+										</NavLink>
+									</li>
+								</React.Fragment>
+							) : (
+								<li className="nav-item">
+									<NavLink to="/login" className="nav-link">
+										Login
+									</NavLink>
+								</li>
+							)}
+						</ul>
+
+						<form className="d-flex">
+							<input
+								className="form-control me-2"
+								type="search"
+								placeholder="Search"
+								aria-label="Search"
+							/>
+							<button className="btn btn-outline-success" type="submit">
+								Search
+							</button>
+						</form>
+					</div>
+				</div>
+			</nav>
 		</>
 	);
 };
