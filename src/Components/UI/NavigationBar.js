@@ -1,15 +1,5 @@
 import React, { Fragment } from "react";
-import {
-	Navbar,
-	Nav,
-	NavDropdown,
-	Container,
-	nav,
-	li,
-	hr,
-} from "react-bootstrap";
-import reactDom from "react-dom";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navigationbar = (props) => {
 	return (
@@ -41,7 +31,7 @@ const Navigationbar = (props) => {
 							</li>
 						</ul>
 
-						<ul class="navbar-nav me-4 mb-2 mb-lg-0">
+						<ul className="navbar-nav me-4 mb-2 mb-lg-0">
 							{props.whetherLoggedIn ? (
 								<React.Fragment>
 									<li className="nav-item">
