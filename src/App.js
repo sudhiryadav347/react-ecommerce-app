@@ -9,6 +9,7 @@ import Home from "./Components/Home";
 import About from "./Components/About";
 import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
+import Pagenotfound from "./Components/Pagenotfound";
 
 const App = () => {
 	const [IsLoggedIn, setIsLoggedIn] = useState(false);
@@ -73,6 +74,7 @@ const App = () => {
 								}
 							/>
 							<Route path="dashboard" element={<Dashboard />} />
+							<Route path="*" element={<Pagenotfound />} />
 						</Routes>
 					</Container>
 				</body>
