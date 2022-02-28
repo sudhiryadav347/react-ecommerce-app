@@ -34,6 +34,12 @@ const Login = (props) => {
 		isValid: null,
 	});
 
+  //use object destructuring so that useeffect only runs when the emailState.isValid or passwordState.isValid changes
+  // with curly brackets on the left we are using object destructuring not assigning values emailisValid and passwordisValid are the aliases.
+  const { isValid: emailisValid} = emailState;
+  const { isValid: passwordisValid} = passwordState;
+
+
   useEffect(() => {
 		const identifier = setTimeout(() => {
 			// console.log("Checking form validity.");
@@ -46,7 +52,7 @@ const Login = (props) => {
 			// console.log("Cleaning timeout of previous key stroke.");
 			clearTimeout(identifier);
 		};
-	}, [emailState, passwordState]);
+	}, [emailisValid, passwordisValid]);
 
 	const emailChangeHandler = (event) => {
 		dispatchEmail({
