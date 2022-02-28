@@ -52,6 +52,8 @@ const Login = (props) => {
 			// console.log("Cleaning timeout of previous key stroke.");
 			clearTimeout(identifier);
 		};
+    // in the parameters below you can also use [emailState.isValid, passwordState.isValid] but we want to demonstrate object destructuring
+    // so used it this way.
 	}, [emailisValid, passwordisValid]);
 
 	const emailChangeHandler = (event) => {
