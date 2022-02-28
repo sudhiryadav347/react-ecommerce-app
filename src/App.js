@@ -10,6 +10,7 @@ import About from "./Components/About";
 import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 import Pagenotfound from "./Components/Pagenotfound";
+import AuthContext from "./Components/Context/auth-context";
 
 const App = () => {
 	const [IsLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,41 +46,43 @@ const App = () => {
 	};
 
 	return (
-		<React.Fragment>
-			<header className="App-header">
-				<Container className="p-3">
-					<Row>
-						<Logo />
-						<Cartcounter itemCount={cartCount} />
-					</Row>
-				</Container>
-			</header>
-
-			<BrowserRouter>
-				<Navigationbar onLogout={logoutHandler} whetherLoggedIn={IsLoggedIn} />
-				<body>
-					<Container className="pt-4">
-						<Routes>
-							<Route path="about" element={<About />} />
-							<Route
-								path="/"
-								element={
-									<Home cartContentCounter={cartContentCounterHandler} />
-								}
-							/>
-							<Route
-								path="login"
-								element={
-									<Login onLogin={loginHandler} showAlert={isValidLogin} />
-								}
-							/>
-							<Route path="dashboard" element={<Dashboard />} />
-							<Route path="*" element={<Pagenotfound />} />
-						</Routes>
+		<AuthContext.Provider value={ {isLoggedIn: IsLoggedIn}}>
+				<header className="App-header">
+					<Container className="p-3">
+						<Row>
+							<Logo />
+							<Cartcounter itemCount={cartCount} />
+						</Row>
 					</Container>
-				</body>
-			</BrowserRouter>
-		</React.Fragment>
+				</header>
+
+				<BrowserRouter>
+					<Navigationbar
+						onLogout={logoutHandler}
+					/>
+					<body>
+						<Container className="pt-4">
+							<Routes>
+								<Route path="about" element={<About />} />
+								<Route
+									path="/"
+									element={
+										<Home cartContentCounter={cartContentCounterHandler} />
+									}
+								/>
+								<Route
+									path="login"
+									element={
+										<Login onLogin={loginHandler} showAlert={isValidLogin} />
+									}
+								/>
+								<Route path="dashboard" element={<Dashboard />} />
+								<Route path="*" element={<Pagenotfound />} />
+							</Routes>
+						</Container>
+					</body>
+				</BrowserRouter>
+		</AuthContext.Provider>
 	);
 };
 
