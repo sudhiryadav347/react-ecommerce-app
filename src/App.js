@@ -46,7 +46,7 @@ const App = () => {
 	};
 
 	return (
-		<AuthContext.Provider value={ {isLoggedIn: IsLoggedIn}}>
+		<AuthContext.Provider value={ {isLoggedIn: IsLoggedIn, onLogout	: logoutHandler}}>
 				<header className="App-header">
 					<Container className="p-3">
 						<Row>
@@ -57,9 +57,7 @@ const App = () => {
 				</header>
 
 				<BrowserRouter>
-					<Navigationbar
-						onLogout={logoutHandler}
-					/>
+					<Navigationbar/>
 					<body>
 						<Container className="pt-4">
 							<Routes>

@@ -5,7 +5,7 @@ import AuthContext from "../Context/auth-context";
 const Navigationbar = (props) => {
 
 	const ctx = useContext(AuthContext);
-	
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<div className="container">
@@ -44,7 +44,7 @@ const Navigationbar = (props) => {
 								</li>
 
 								<li className="nav-item">
-									<NavLink to="/" className="nav-link" onClick={props.onLogout}>
+									<NavLink to="/" className="nav-link" onClick={ctx.onLogout}>
 										Logout
 									</NavLink>
 								</li>
