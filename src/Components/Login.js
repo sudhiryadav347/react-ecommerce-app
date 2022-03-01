@@ -1,6 +1,7 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useReducer, useState, useEffect, useContext } from "react";
 import Statictextblock from "./StaticTextBlock";
 import { Form, Button, Col, Card, Alert, Row } from "react-bootstrap";
+import AuthContext from "./Context/auth-context";
 
 const emailReducer = (state, action) => {
 	if (action.type === "USER_INPUT") {
@@ -23,6 +24,7 @@ const passwordReducer = (state, action) => {
 };
 
 const Login = (props) => {
+	const loginCTX = useContext(AuthContext);
 	const [FormIsValid, setFormIsValid] = useState(false);
 	const [emailState, dispatchEmail] = useReducer(emailReducer, {
 		value: "",
@@ -34,26 +36,23 @@ const Login = (props) => {
 		isValid: null,
 	});
 
-  //use object destructuring so that useeffect only runs when the emailState.isValid or passwordState.isValid changes
-  // with curly brackets on the left we are using object destructuring not assigning values emailisValid and passwordisValid are the aliases.
-  const { isValid: emailisValid} = emailState;
-  const { isValid: passwordisValid} = passwordState;
+	//use object destructuring so that useeffect only runs when the emailState.isValid or passwordState.isValid changes
+	// with curly brackets on the left we are using object destructuring not assigning values emailisValid and passwordisValid are the aliases.
+	const { isValid: emailisValid } = emailState;
+	const { isValid: passwordisValid } = passwordState;
 
-
-  useEffect(() => {
+	useEffect(() => {
 		const identifier = setTimeout(() => {
 			// console.log("Checking form validity.");
-			setFormIsValid(
-				emailState.isValid && passwordState.isValid
-			);
+			setFormIsValid(emailState.isValid && passwordState.isValid);
 		}, 500);
 
 		return () => {
 			// console.log("Cleaning timeout of previous key stroke.");
 			clearTimeout(identifier);
 		};
-    // in the parameters below you can also use [emailState.isValid, passwordState.isValid] but we want to demonstrate object destructuring
-    // so used it this way.
+		// in the parameters below you can also use [emailState.isValid, passwordState.isValid] but we want to demonstrate object destructuring
+		// so used it this way.
 	}, [emailisValid, passwordisValid]);
 
 	const emailChangeHandler = (event) => {
@@ -88,14 +87,14 @@ const Login = (props) => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		props.onLogin(emailState.value, passwordState.value);
+		loginCTX.onLogin(emailState.value, passwordState.value);
 	};
 
 	return (
 		<Row>
 			<Statictextblock />
 			<Col md={{ span: 6 }}>
-				{!props.showAlert && (
+				{!loginCTX.isCorrectLogin && (
 					<Alert variant="danger">
 						<Alert.Heading>Oh snap! You got an error!</Alert.Heading>
 						<p>
