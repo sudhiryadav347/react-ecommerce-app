@@ -1,31 +1,34 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { Component, state, useState } from "react";
+import { Button } from "react-bootstrap";
+import Productrow from "./Productrow";
 
-class Addtocart extends Component {
+const Addtocart = (props) => {
+	const [Label, setLabel] = useState("Add to Cart");
+	const AddedToCart = (param) => {
+		setLabel(param);
+		setTimeout(() => {
+			setLabel("Add to Cart");
+		}, 1000);
+		props.addItemtoCart({
+			ID: props.ProductDetails.ID,
+			name: props.ProductDetails.name,
+			price: props.ProductDetails.price,
+			quantity: 1,
+		});
+	};
 
-    constructor(props){
-        super(props);
-        this.state = {label: 'Add to Cart', counter: 1 };
-    }
-
-
-  AddedToCart(param) {
-    this.setState((prevState) => ({ label: param, counter: +1 }));
-    setTimeout(()=>{ this.setState({label: 'Add to Cart'})}, 1000);
-    this.props.itemsCounter(this.state.counter);
-  }
-
-  render() {
-    return (
-      <div>
-          <p></p>
-        <Button variant="primary" onClick={ ()=>this.AddedToCart('Added to the Cart!') }>{this.state.label}</Button>
-        {/* <Button variant="primary" onClick={() => this.AddedToCart('Sudhir')}>
-          Add to Cart
-        </Button> */}
-      </div>
-    );
-  }
-}
+	return (
+		<div>
+			<Button
+				variant="primary"
+				onClick={() => {
+					AddedToCart("Added to Cart");
+				}}
+			>
+				{Label}
+			</Button>
+		</div>
+	);
+};
 
 export default Addtocart;

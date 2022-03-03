@@ -112,6 +112,7 @@ const Login = (props) => {
 								<Form.Control
 									type="email"
 									placeholder="Enter email"
+									value={emailState.value}
 									onChange={emailChangeHandler}
 									onBlur={validateEmailHandler}
 									isInvalid={!emailState.isValid}
@@ -126,6 +127,7 @@ const Login = (props) => {
 								<Form.Control
 									type="password"
 									placeholder="Password"
+									value={passwordState.value}
 									onChange={passwordChangeHandler}
 									onBlur={validatePasswordHandler}
 									isInvalid={!passwordState.isValid}

@@ -23,7 +23,7 @@ const App = () => {
 				<Container className="p-3">
 					<Row>
 						<Logo />
-							<Cartcounter itemCount={cartCount} />
+						<Cartcounter itemCount={cartCount} />
 					</Row>
 				</Container>
 			</header>
@@ -34,11 +34,11 @@ const App = () => {
 						<Routes>
 							<Route path="about" element={<About />} />
 							<Route
-									path="/"
-									element={
-										<Home cartContentCounter={cartContentCounterHandler} />
-									}
-								/>
+								path="/"
+								element={
+									<Home cartContentCounter={cartContentCounterHandler} />
+								}
+							/>
 							<Route path="login" element={<Login />} />
 							<Route path="dashboard" element={<Dashboard />} />
 							<Route path="*" element={<Pagenotfound />} />
