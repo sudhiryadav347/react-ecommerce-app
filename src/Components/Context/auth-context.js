@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+
 
 const AuthContext = React.createContext({
 	isLoggedIn: false,
@@ -20,6 +22,7 @@ export const AuthContextProvider = (props) => {
 	}, []);
 
 	const loginHandler = (email, password) => {
+
 		if (email === "sudhir@gmail.com" && password === "1234567") {
 			localStorage.setItem("isLoggedIn", "1");
 			setIsLoggedIn(true);
