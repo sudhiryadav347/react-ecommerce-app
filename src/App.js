@@ -23,25 +23,29 @@ const App = () => {
 				<Container className='p-3'>
 					<Row>
 						<Logo />
-							<Cartcounter itemCount={cartCount} />
+						<Cartcounter itemCount={cartCount} />
 					</Row>
 				</Container>
 			</header>
-			<Navigationbar />
-			<body>
-				<Container className='pt-4'>
-					<Routes>
-						<Route path='about' element={<About />} />
-						<Route
-							path='/'
-							element={<Home cartContentCounter={cartContentCounterHandler} />}
-						/>
-						<Route path='login' element={<Login />} />
-						<Route path='dashboard' element={<Dashboard />} />
-						<Route path='*' element={<Pagenotfound />} />
-					</Routes>
-				</Container>
-			</body>
+			<BrowserRouter>
+				<Navigationbar />
+				<body>
+					<Container className="pt-4">
+						<Routes>
+							<Route path="about" element={<About />} />
+							<Route
+								path="/"
+								element={
+									<Home cartContentCounter={cartContentCounterHandler} />
+								}
+							/>
+							<Route path="login" element={<Login />} />
+							<Route path="dashboard" element={<Dashboard />} />
+							<Route path="*" element={<Pagenotfound />} />
+						</Routes>
+					</Container>
+				</body>
+			</BrowserRouter>
 		</React.Fragment>
 	);
 };
