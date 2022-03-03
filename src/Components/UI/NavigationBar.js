@@ -65,7 +65,7 @@ const Navigationbar = (props) => {
 							placeholder="Search"
 							aria-label="Search"
 						/>
-						<button className="btn btn-outline-success" type="submit">
+						<button className="btn btn-outline-danger" type="submit">
 							Search
 						</button>
 					</form>

@@ -20,7 +20,7 @@ const Addtocart = (props) => {
 	return (
 		<div>
 			<Button
-				variant="primary"
+				variant="danger"
 				onClick={() => {
 					AddedToCart("Added to Cart");
 				}}
