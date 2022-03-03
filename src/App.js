@@ -27,9 +27,7 @@ const App = () => {
 					</Row>
 				</Container>
 			</header>
-			<BrowserRouter>
 				<Navigationbar />
-				<body>
 					<Container className="pt-4">
 						<Routes>
 							<Route path="about" element={<About />} />
@@ -44,8 +42,6 @@ const App = () => {
 							<Route path="*" element={<Pagenotfound />} />
 						</Routes>
 					</Container>
-				</body>
-			</BrowserRouter>
 		</React.Fragment>
 	);
 };
