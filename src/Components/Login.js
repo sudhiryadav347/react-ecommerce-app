@@ -1,6 +1,6 @@
 import React, { useReducer, useState, useEffect, useContext } from "react";
 import Statictextblock from "./StaticTextBlock";
-import { Form, Button, Col, Card, Alert, Row } from "react-bootstrap";
+import { Form, Button, Col, Card, Row } from "react-bootstrap";
 import AuthContext from "./Context/auth-context";
 import { NavLink } from "react-router-dom";
 import DismissableAlert from "./Alerts/DismissableAlert";
@@ -51,7 +51,7 @@ const Login = (props) => {
 	useEffect(() => {
 		const identifier = setTimeout(() => {
 			// console.log("Checking form validity.");
-			setFormIsValid(emailState.isValid && passwordState.isValid);
+			setFormIsValid(emailisValid && passwordisValid);
 		}, 500);
 
 		return () => {
@@ -94,7 +94,7 @@ const Login = (props) => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		loginCTX.onLogin(emailState.value, passwordState.value);
+		// loginCTX.onLogin(emailState.value, passwordState.value);
 		setisLoading(true);
 
 		// https://firebase.google.com/docs/reference/rest/auth#section-sign-in-email-password
@@ -111,23 +111,26 @@ const Login = (props) => {
 					"Content-Type": "application/json",
 				},
 			}
-		).then((Response) => {
-			setisLoading(false);
-			if (Response.ok) {
-				// ...
-				setAlert({ show: false })
-				alert("user logged in.");
-				console.log(
-					Response.json().then((data) => {
-						return data.refreshToken;
-					})
-				);
-			} else {
-				Response.json().then((data) => {
-					setAlert({ show: true, message: data.error.message })
-				});
-			}
-		});
+		)
+			.then((Response) => {
+				setisLoading(false);
+				if (Response.ok) {
+					return Response.json();
+				} else {
+					return Response.json().then((data) => {
+						setAlert({ show: true, message: data.error.message });
+						throw new Error(data.error.message);
+					});
+				}
+			})
+
+			.then((data) => {
+				loginCTX.onLogin(data.idToken);
+			})
+
+			.catch((err) => {
+				setAlert({ show: true, message: err.message });
+			});
 	};
 
 	return (
