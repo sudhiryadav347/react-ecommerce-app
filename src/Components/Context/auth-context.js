@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-
 
 const AuthContext = React.createContext({
 	isLoggedIn: false,

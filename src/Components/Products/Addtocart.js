@@ -1,13 +1,16 @@
-import React, { Component, state, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import Productrow from "./Productrow";
 
 const Addtocart = (props) => {
 	const [Label, setLabel] = useState("Add to Cart");
+	const [isLoading, setisLoading] = useState(false);
+
 	const AddedToCart = (param) => {
+		setisLoading(true);
 		setLabel(param);
 		setTimeout(() => {
 			setLabel("Add to Cart");
+			setisLoading(false);
 		}, 1000);
 		props.addItemtoCart({
 			ID: props.ProductDetails.ID,
@@ -21,8 +24,9 @@ const Addtocart = (props) => {
 		<div>
 			<Button
 				variant="danger"
+				disabled={isLoading}
 				onClick={() => {
-					AddedToCart("Added to Cart");
+					AddedToCart("Adding...");
 				}}
 			>
 				{Label}
