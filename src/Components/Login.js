@@ -60,7 +60,7 @@ const Login = (props) => {
 		};
 		// in the parameters below you can also use [emailState.isValid, passwordState.isValid] but we want to demonstrate object destructuring
 		// so used it this way.
-	}, [emailisValid, passwordisValid]);
+	}, [emailisValid, passwordisValid, FormIsValid]);
 
 	const emailChangeHandler = (event) => {
 		dispatchEmail({
@@ -175,8 +175,12 @@ const Login = (props) => {
 							<Row>
 								<div class='d-flex align-items-center'>
 									<div>
-										<Button variant='danger' type='submit' disabled={isLoading}>
-											{isLoading ? "Logging in..." : "Login"}
+										<Button
+											variant='danger'
+											type='submit'
+											disabled={!FormIsValid ? true : isLoading ? true : false}
+										>
+											{isLoading ? "Loading..." : "Login"}
 										</Button>
 									</div>
 									<div>
