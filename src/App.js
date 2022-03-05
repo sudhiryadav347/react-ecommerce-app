@@ -10,6 +10,7 @@ import About from "./Components/About";
 import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 import Pagenotfound from "./Components/Pagenotfound";
+import Signup from "./Components/Signup";
 
 const App = () => {
 	const [cartCount, setcartCount] = useState(0);
@@ -38,6 +39,7 @@ const App = () => {
 								}
 							/>
 							<Route path="login" element={<Login />} />
+							<Route path="signup" element={<Signup />} />
 							<Route path="dashboard" element={<Dashboard />} />
 							<Route path="*" element={<Pagenotfound />} />
 						</Routes>

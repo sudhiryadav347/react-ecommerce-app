@@ -1,47 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-
+import React, { useState } from "react";
 
 const AuthContext = React.createContext({
+	token: "",
 	isLoggedIn: false,
-	isCorrectLogin: false,
 	onLogout: () => {},
-	onLogin: (email, password) => {},
+	onLogin: (token) => {},
 });
 
 export const AuthContextProvider = (props) => {
 
-	const [IsLoggedIn, setIsLoggedIn] = useState(false);
-	const [isValidLogin, setisValidLogin] = useState(true);
+	const [token, setToken] = useState(null);
 
-	useEffect(() => {
-		const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
-		if (storedUserLoggedInInformation === "1") {
-			setIsLoggedIn(true);
-		}
-	}, []);
+	const userIsLoggedIn = !!token;
 
-	const loginHandler = (email, password) => {
-
-		if (email === "sudhir@gmail.com" && password === "1234567") {
-			localStorage.setItem("isLoggedIn", "1");
-			setIsLoggedIn(true);
-			setisValidLogin(true);
-		} else {
-			setisValidLogin(false);
-		}
+	const loginHandler = (token) => {
+		setToken(token);
 	};
 
 	const logoutHandler = () => {
-		localStorage.removeItem("isLoggedIn");
-		setIsLoggedIn(false);
+		setToken(null);
 	};
+
 
 	return (
 		<AuthContext.Provider
 			value={{
-				isLoggedIn: IsLoggedIn,
-				isCorrectLogin: isValidLogin,
+				token: token,
+				isLoggedIn: userIsLoggedIn,
 				onLogout: logoutHandler,
 				onLogin: loginHandler,
 			}}
