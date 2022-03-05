@@ -87,7 +87,7 @@ const Signup = () => {
 						<Form onSubmit={submitHandler} noValidate>
 							<Form.Group className='mb-3' controlId='formBasicEmail'>
 								<Form.Label>Email address</Form.Label>
-								<Form.Control ref={emailInputRef} />
+								<Form.Control ref={emailInputRef} placeholder='Enter email'/>
 								<Form.Text className='text-muted'>
 									We'll never share your email with anyone else.
 								</Form.Text>
@@ -95,7 +95,7 @@ const Signup = () => {
 
 							<Form.Group className='mb-3' controlId='formBasicPassword'>
 								<Form.Label>Password(Min. 6 characters)</Form.Label>
-								<Form.Control ref={passwordInputRef} />
+								<Form.Control ref={passwordInputRef} type='password' minLength={6} placeholder='Password' />
 							</Form.Group>
 							<Row>
 								<div className='d-flex align-items-center'>

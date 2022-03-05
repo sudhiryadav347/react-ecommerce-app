@@ -169,6 +169,7 @@ const Login = (props) => {
 								<Form.Control
 									type='password'
 									placeholder='Password'
+                  minLength={6}
 									value={passwordState.value}
 									onChange={passwordChangeHandler}
 									onBlur={validatePasswordHandler}
