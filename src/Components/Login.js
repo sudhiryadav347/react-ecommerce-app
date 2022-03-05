@@ -2,8 +2,9 @@ import React, { useReducer, useState, useEffect, useContext } from "react";
 import Statictextblock from "./StaticTextBlock";
 import { Form, Button, Col, Card, Row } from "react-bootstrap";
 import AuthContext from "./Context/auth-context";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import DismissableAlert from "./Alerts/DismissableAlert";
+
 
 const emailReducer = (state, action) => {
 	if (action.type === "USER_INPUT") {
@@ -42,6 +43,7 @@ const Login = (props) => {
 		show: false,
 		message: "Authentication failed!",
 	});
+  const navigate = useNavigate();
 
 	//use object destructuring so that useeffect only runs when the emailState.isValid or passwordState.isValid changes
 	// with curly brackets on the left we are using object destructuring not assigning values emailisValid and passwordisValid are the aliases.
@@ -126,6 +128,7 @@ const Login = (props) => {
 
 			.then((data) => {
 				loginCTX.onLogin(data.idToken);
+        navigate('/dashboard');
 			})
 
 			.catch((err) => {
