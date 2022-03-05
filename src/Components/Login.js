@@ -177,7 +177,7 @@ const Login = (props) => {
 								/>
 							</Form.Group>
 							<Row>
-								<div class='d-flex align-items-center'>
+								<div className='d-flex align-items-center'>
 									<div>
 										<Button
 											variant='danger'
@@ -188,7 +188,7 @@ const Login = (props) => {
 										</Button>
 									</div>
 									<div>
-										<p class='display-6 fs-6 m-0 p-0 ps-4'>
+										<p className='display-6 fs-6 m-0 p-0 ps-4'>
 											Not a user yet?
 											<NavLink to='/signup' className='ps-1'>
 												Create your account here.

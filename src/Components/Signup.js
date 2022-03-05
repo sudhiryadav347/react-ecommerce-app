@@ -31,7 +31,7 @@ const Signup = () => {
 		fetch(
 			"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA1EK0Kjeg6nIs3VSvft9mzDVuEfA8budE",
 			{
-				method: "POSt",
+				method: "POST",
 				body: JSON.stringify({
 					email: enteredEmail,
 					password: enteredPassword,
