@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import { Row } from "react-bootstrap";
-import Cartcounter from "./Components/UI/Cartcounter";
+import Cart from "./Components/UI/Cart";
 import Navigationbar from "./Components/UI/NavigationBar";
 import Logo from "./Components/UI/Logo";
 import { Route, Routes } from "react-router-dom";
@@ -14,13 +14,14 @@ import Signup from "./Components/Signup";
 
 const App = () => {
 
+
 	return (
 		<React.Fragment>
 			<header className='App-header'>
 				<Container className='p-3'>
 					<Row>
 						<Logo />
-						<Cartcounter/>
+						<Cart/>
 					</Row>
 				</Container>
 			</header>

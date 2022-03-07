@@ -6,7 +6,7 @@ import "./QuantitySelector.scss";
 export default function QuantitySelector(props) {
 
     // Maintain local state for the Cart quantities of each item
-	const [Cart, setCart] = useState({
+	const [CartQTY, setCartQTY] = useState({
 		value: props.default,
 	});
 
@@ -23,7 +23,7 @@ export default function QuantitySelector(props) {
 			);
 
 			// Get the new QTY state
-			const newUpdatedQTY = Cart.value;
+			const newUpdatedQTY = CartQTY.value;
 
 			// Update the new QTY for the item in our local variable.
 			getCartDataFromLocalStorage[props.itemIndex].quantity = newUpdatedQTY;
@@ -40,10 +40,10 @@ export default function QuantitySelector(props) {
 		updateCartQTY();
 
 		return () => {};
-	}, [Cart, props.itemIndex]);
+	}, [CartQTY, props.itemIndex]);
 
 	const increment = () => {
-		setCart((prevState) => {
+		setCartQTY((prevState) => {
 			return { value: prevState.value + 1 };
 		});
 
@@ -62,7 +62,7 @@ export default function QuantitySelector(props) {
 	};
 
 	const decrement = () => {
-		setCart((prevState) => {
+		setCartQTY((prevState) => {
 			return { value: prevState.value > 1 ? prevState.value - 1 : 1 };
 		});
 
@@ -92,7 +92,7 @@ export default function QuantitySelector(props) {
 				<input
 					className='quantity-input__screen'
 					type='text'
-					value={Cart.value}
+					value={CartQTY.value}
 					readOnly
 				/>
 				<button

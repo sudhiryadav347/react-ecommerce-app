@@ -12,21 +12,23 @@ import cartContext from "../Context/cart-context";
 import styles from "./CartCounter.module.css";
 import QuantitySelector from "./QuantitySelector/QuantitySelector";
 
-export default function Cartcounter(props) {
+export default function Cart(props) {
 	const cartCTX = useContext(cartContext);
 	const [cartState, setcartState] = useState({
 		show: false,
 		cart: [],
 	});
 
-	const handleClose = () =>
-		setcartState({
-			show: false,
-			cart: JSON.parse(localStorage.getItem("cart")),
-		});
 	const handleShow = () => {
 		setcartState({
 			show: true,
+			cart: JSON.parse(localStorage.getItem("cart")),
+		});
+	};
+
+	const handleClose = () => {
+		setcartState({
+			show: false,
 			cart: JSON.parse(localStorage.getItem("cart")),
 		});
 	};
@@ -54,9 +56,7 @@ export default function Cartcounter(props) {
 							<span
 								className={`position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle ${styles.badge}`}
 							>
-								<span style={{ color: "#fff" }}>
-									{/*props.itemCount*/ cartCTX.cartItemsCount}
-								</span>
+								<span style={{ color: "#fff" }}>{cartCTX.cartItemsCount}</span>
 							</span>
 						)}
 					</Nav.Link>

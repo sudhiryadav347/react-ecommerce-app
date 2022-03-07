@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 const cartContext = React.createContext({
-	cartItemsCount: 0,
-	cartItems: 0,
+	cartItems: ()=>{},
+    cartItemsCount: 0
+
 });
 
 export const CartContextProvider = (props) => {
-    
+
 	const [cartCount, setcartCount] = useState(0);
 	const cartContentCounterHandler = (data) => {
 		setcartCount(data);
@@ -15,8 +16,8 @@ export const CartContextProvider = (props) => {
 	return (
 		<cartContext.Provider
 			value={{
-				cartItemsCount: cartCount,
 				cartItems: cartContentCounterHandler,
+                cartItemsCount: cartCount
 			}}
 		>
 			{props.children}
