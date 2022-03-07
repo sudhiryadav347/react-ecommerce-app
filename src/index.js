@@ -8,13 +8,16 @@ import { BrowserRouter } from "react-router-dom";
 // Importing the Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthContextProvider } from "./Components/Context/auth-context";
+import { CartContextProvider } from "./Components/Context/cart-context";
 
 ReactDOM.render(
 	<React.StrictMode>
 		<AuthContextProvider>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
+			<CartContextProvider>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</CartContextProvider>
 		</AuthContextProvider>
 	</React.StrictMode>,
 	document.getElementById("root")
