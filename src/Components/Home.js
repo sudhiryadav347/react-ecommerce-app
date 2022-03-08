@@ -13,7 +13,7 @@ const Home = (props) => {
 	const cartCTX = useContext(cartContext);
 
 	useEffect(() => {
-    const getCartDataFromLocalStorage = JSON.parse(
+		const getCartDataFromLocalStorage = JSON.parse(
 			localStorage.getItem("cart")
 		);
 
@@ -27,10 +27,10 @@ const Home = (props) => {
 			// console.log(response.data);
 		});
 
-    // If cart is set then update cartItems state in cart-context & run it only once + everytime the cart context state updates.
-    if(getCartDataFromLocalStorage !== null){
-		cartCTX.cartItems(getCartQuantities());
-    }
+		// If cart is set then update cartItems state in cart-context & run it only once + everytime the cart context state updates.
+		if(getCartDataFromLocalStorage !== null){
+			cartCTX.cartItems(getCartQuantities());
+		}
 
 		return () => {};
 	}, [cartCTX.cartItems, cartCTX]);
@@ -78,10 +78,8 @@ const Home = (props) => {
 
 		// if ID exists then just update the qty
 		const existingItem = cartCopy.find((cartItem) => cartItem.ID === ID);
-		
-    if (existingItem) {
-      console.log('existingItem.quantity', existingItem.quantity);
-      console.log('item.quantity', item.quantity);
+
+		if (existingItem) {
 			existingItem.quantity += item.quantity;
 		}
 
