@@ -131,7 +131,12 @@ const Login = (props) => {
 			})
 
 			.then((data) => {
-				loginCTX.onLogin(data.idToken);
+				// send the expiration time. We are sending it in milliseconds
+        // Note: Adding + in front of a variable will convert it to a number.
+				const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000));
+
+        // passing it as a string because in our helper function we are converting it to date
+				loginCTX.onLogin(data.idToken, expirationTime.toISOString());
 				navigate("/dashboard");
 			})
 
