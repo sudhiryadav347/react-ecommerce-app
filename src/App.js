@@ -4,7 +4,7 @@ import { Row } from "react-bootstrap";
 import Cartcounter from "./Components/UI/Cartcounter";
 import Navigationbar from "./Components/UI/NavigationBar";
 import Logo from "./Components/UI/Logo";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./Components/Home";
 import About from "./Components/About";
 import Login from "./Components/Login";
@@ -19,7 +19,6 @@ const App = () => {
 		setcartCount(data);
 	};
 	const authCTX = useContext(AuthContext);
-	const navigate = useNavigate();
 
 	return (
 		<React.Fragment>
