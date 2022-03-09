@@ -131,6 +131,7 @@ const Login = (props) => {
 			})
 
 			.then((data) => {
+
 				// send the expiration time. We are sending it in milliseconds
         // Note: Adding + in front of a variable will convert it to a number.
 				const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000));

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import Container from "react-bootstrap/Container";
 import { Row } from "react-bootstrap";
-import Cart from "./Components/UI/Cart";
+import Cartcounter from "./Components/UI/Cartcounter";
 import Navigationbar from "./Components/UI/NavigationBar";
 import Logo from "./Components/UI/Logo";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
@@ -14,7 +14,6 @@ import Signup from "./Components/Signup";
 import AuthContext from "./Components/Context/auth-context";
 
 const App = () => {
-
 	const [cartCount, setcartCount] = useState(0);
 	const cartContentCounterHandler = (data) => {
 		setcartCount(data);
@@ -28,7 +27,7 @@ const App = () => {
 				<Container className='p-3'>
 					<Row>
 						<Logo />
-						<Cart />
+						<Cartcounter itemCount={cartCount} />
 					</Row>
 				</Container>
 			</header>
@@ -38,7 +37,7 @@ const App = () => {
 					<Route path='about' element={<About />} />
 					<Route
 						path='/'
-						element={<Home />}
+						element={<Home cartContentCounter={cartContentCounterHandler} />}
 					/>
 					{!authCTX.isLoggedIn && (
 						<>

@@ -1,40 +1,28 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import Addtocart from "./Products/Addtocart";
 import Productrow from "./Products/Productrow";
 import axios from "axios";
 import Rate from "./UI/Rate";
-import cartContext from "./Context/cart-context";
 
 const Home = (props) => {
+	
 	const [ProductData, setProductData] = useState([]);
 	const [Cart, setCart] = useState([]);
-	const cartCTX = useContext(cartContext);
 
 	useEffect(() => {
-		const getCartDataFromLocalStorage = JSON.parse(
-			localStorage.getItem("cart")
-		);
-
 		if (isCartSavedLocally()) {
 			setCart(JSON.parse(localStorage.getItem("cart")));
-			// props.cartContentCounter(getCartQuantities());
+			props.cartContentCounter(getCartQuantities());
 		}
-		
 		axios.get("https://fakestoreapi.com/products").then(function (response) {
 			// handle success
 			setProductData(response.data);
 			// console.log(response.data);
 		});
-
-		// If cart is set then update cartItems state in cart-context & run it only once + everytime the cart context state updates.
-		if(getCartDataFromLocalStorage !== null){
-			cartCTX.cartItems(getCartQuantities());
-		}
-
 		return () => {};
-	}, [cartCTX.cartItems, cartCTX]);
+	}, []);
 
 	const isCartSavedLocally = () => {
 		let localCart = localStorage.getItem("cart");
@@ -51,14 +39,10 @@ const Home = (props) => {
 		const getCartDataFromLocalStorage = JSON.parse(
 			localStorage.getItem("cart")
 		);
-
-
-		// console.log(getCartDataFromLocalStorage);
-
 		const itemQantitiesOnly = [];
 
 		getCartDataFromLocalStorage.map((item) => {
-			return itemQantitiesOnly.push(item.quantity);
+			itemQantitiesOnly.push(item.quantity);
 		});
 
 		const getSumofQuantities = itemQantitiesOnly.reduce((a, b) => {
@@ -70,7 +54,6 @@ const Home = (props) => {
 
 	// function to create cart and then save it locally in browser
 	const addItem = (item) => {
-
 		// if cart key exists in the browser storage then spread existing object otherwise create blank array.
 		const cartCopy = !isCartSavedLocally() ? [] : [...Cart];
 
@@ -78,12 +61,10 @@ const Home = (props) => {
 		const { ID } = item;
 
 		// if ID exists then just update the qty
-		const existingItem = cartCopy.find((cartItem) => cartItem.ID === ID);
-
+		const existingItem = cartCopy.find((cartItem) => cartItem.ID == ID);
 		if (existingItem) {
 			existingItem.quantity += item.quantity;
 		}
-
 		// otherwise push the item in the cartcopy array.
 		else {
 			cartCopy.push(item);
@@ -96,11 +77,7 @@ const Home = (props) => {
 		localStorage.setItem("cart", stringCart);
 
 		// send the total of quantities in cart object using props.
-		// props.cartContentCounter(getCartQuantities());
-
-		if (getCartQuantities() !== null) {
-			cartCTX.cartItems(getCartQuantities());
-		}
+		props.cartContentCounter(getCartQuantities());
 	};
 
 	return (
@@ -111,7 +88,6 @@ const Home = (props) => {
 					const productProp = {
 						ID: product.id,
 						name: product.title,
-						image: product.image,
 						price: product.price,
 					};
 
