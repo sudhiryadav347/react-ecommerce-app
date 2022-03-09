@@ -13,15 +13,13 @@ import Pagenotfound from "./Components/Pagenotfound";
 import Signup from "./Components/Signup";
 
 const App = () => {
-
-
 	return (
 		<React.Fragment>
 			<header className='App-header'>
 				<Container className='p-3'>
 					<Row>
 						<Logo />
-						<Cart/>
+						<Cart />
 					</Row>
 				</Container>
 			</header>
@@ -29,12 +27,7 @@ const App = () => {
 			<Container className='pt-4'>
 				<Routes>
 					<Route path='about' element={<About />} />
-					<Route
-						path='/'
-						element={
-							<Home />
-						}
-					/>
+					<Route path='/' element={<Home />} />
 					<Route path='login' element={<Login />} />
 					<Route path='signup' element={<Signup />} />
 					<Route path='dashboard' element={<Dashboard />} />

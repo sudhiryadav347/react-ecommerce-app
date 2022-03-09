@@ -21,6 +21,7 @@ const Home = (props) => {
 			setCart(JSON.parse(localStorage.getItem("cart")));
 			// props.cartContentCounter(getCartQuantities());
 		}
+		
 		axios.get("https://fakestoreapi.com/products").then(function (response) {
 			// handle success
 			setProductData(response.data);

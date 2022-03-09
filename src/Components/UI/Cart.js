@@ -11,31 +11,29 @@ import {
 import cartContext from "../Context/cart-context";
 import styles from "./CartCounter.module.css";
 import QuantitySelector from "./QuantitySelector/QuantitySelector";
+import RowTotal from "./RowTotal";
 
 export default function Cart(props) {
 	const cartCTX = useContext(cartContext);
 	const [ShowCart, setShowCart] = useState(false);
 	const [CartItems, setCartItems] = useState([]);
+	const getStoredCart = JSON.parse(localStorage.getItem("cart"));
 
 	const handleShow = () => {
 		setShowCart(true);
-		setCartItems(JSON.parse(localStorage.getItem("cart")));
+		setCartItems(getStoredCart);
 	};
 
 	const handleClose = () => {
 		setShowCart(false);
-		setCartItems(JSON.parse(localStorage.getItem("cart")));
+		setCartItems(getStoredCart);
 	};
 
 	const deleteItem = (ID) => {
 		const getCartQuantities = () => {
-			const getCartDataFromLocalStorage = JSON.parse(
-				localStorage.getItem("cart")
-			);
+			let itemQantitiesOnly = [];
 
-			const itemQantitiesOnly = [];
-
-			getCartDataFromLocalStorage.map((item) => {
+			getStoredCart.map((item) => {
 				return itemQantitiesOnly.push(item.quantity);
 			});
 
@@ -47,19 +45,22 @@ export default function Cart(props) {
 		};
 
 		let initialCartItems = CartItems;
+
 		const findItemIndex = initialCartItems.findIndex(
 			(cartItem) => cartItem.ID === ID
 		);
+
 		initialCartItems.splice(findItemIndex, 1);
 
-		// If therea are items present in the cart.
+		// If there are items present in the cart.
 		if (initialCartItems.length > 0) {
 			const stringCart = JSON.stringify(initialCartItems);
 			localStorage.setItem("cart", stringCart);
 			setCartItems(JSON.parse(localStorage.getItem("cart")));
 			cartCTX.cartItems(getCartQuantities());
 		}
-		// if deleted all the items from the cart
+		// if deleted all the items from the cart then remove cart key and do not display the cart modal
+		// also set the cartItems in cart context to 0 so that everywhere it shows 0 items in cart.
 		// because with empty cart key rendering the home component will give error.
 		else {
 			localStorage.removeItem("cart");
@@ -112,6 +113,7 @@ export default function Cart(props) {
 											<th scope='col'>Item Name</th>
 											<th scope='col'>Price</th>
 											<th scope='col'>Quantity</th>
+											<th scope='col'>Row Total</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -132,8 +134,10 @@ export default function Cart(props) {
 															default={item.quantity}
 															itemID={item.ID}
 															itemIndex={index}
+															itemPrice={item.price}
 														/>
 													</td>
+													<td className='align-middle'></td>
 													<td className='align-middle'>
 														<Nav.Link onClick={() => deleteItem(item.ID)}>
 															{

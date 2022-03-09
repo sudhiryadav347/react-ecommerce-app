@@ -4,19 +4,16 @@ import cartContext from "../../Context/cart-context";
 import "./QuantitySelector.scss";
 
 export default function QuantitySelector(props) {
-
-    // Maintain local state for the Cart quantities of each item
+	// Maintain local state for the Cart quantities of each item
 	const [CartQTY, setCartQTY] = useState({
 		value: props.default,
 	});
 
-    // Get the total cart quantities globally
+	// Get the total cart quantities globally
 	const cartCTX = useContext(cartContext);
 
 	useEffect(() => {
-
 		const updateCartQTY = () => {
-
 			// Get the cart object from saved local storage
 			const getCartDataFromLocalStorage = JSON.parse(
 				localStorage.getItem("cart")
@@ -39,6 +36,7 @@ export default function QuantitySelector(props) {
 
 		updateCartQTY();
 
+
 		return () => {};
 	}, [CartQTY, props.itemIndex]);
 
@@ -47,15 +45,8 @@ export default function QuantitySelector(props) {
 			return { value: prevState.value + 1 };
 		});
 
-		// console.log(
-		// 	"item id " +
-		// 		props.itemID +
-		// 		" was added and the updated qty is " +
-		// 		Cart.value
-		// );
-
-        // Get the total quantities and update it in cartcontext so that anywhere else where the # of items in cart 
-        // are displayed can get the most updated value.
+		// Get the total quantities and update it in cartcontext so that anywhere else where the # of items in cart
+		// are displayed can get the most updated value.
 		const getTotalQuantities = cartCTX.cartItemsCount;
 		const newUpdatedtotalQTY = getTotalQuantities + 1;
 		cartCTX.cartItems(newUpdatedtotalQTY);
@@ -73,8 +64,8 @@ export default function QuantitySelector(props) {
 		// 		Cart.value
 		// );
 
-        // Get the total quantities and update it in cartcontext so that anywhere else where the # of items in cart 
-        // are displayed can get the most updated value.
+		// Get the total quantities and update it in cartcontext so that anywhere else where the # of items in cart
+		// are displayed can get the most updated value.
 		const getTotalQuantities = cartCTX.cartItemsCount;
 		const newUpdatedtotalQTY = getTotalQuantities - 1;
 		cartCTX.cartItems(newUpdatedtotalQTY);
@@ -102,6 +93,7 @@ export default function QuantitySelector(props) {
 					&#xff0b;
 				</button>
 			</div>
+			{/* {(CartQTY.value * props.itemPrice).toFixed(2)} */}
 		</div>
 	);
 }
