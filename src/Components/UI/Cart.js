@@ -11,7 +11,6 @@ import {
 import cartContext from "../Context/cart-context";
 import styles from "./CartCounter.module.css";
 import QuantitySelector from "./QuantitySelector/QuantitySelector";
-import RowTotal from "./RowTotal";
 
 export default function Cart(props) {
 	const cartCTX = useContext(cartContext);
