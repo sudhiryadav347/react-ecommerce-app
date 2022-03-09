@@ -15,7 +15,6 @@ const Addtocart = (props) => {
 		props.addItemtoCart({
 			ID: props.ProductDetails.ID,
 			name: props.ProductDetails.name,
-			image:props.ProductDetails.image,
 			price: props.ProductDetails.price,
 			quantity: 1,
 		});
