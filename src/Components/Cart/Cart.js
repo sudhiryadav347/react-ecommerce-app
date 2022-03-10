@@ -7,9 +7,11 @@ import cartContext from "../Context/cart-context";
 export default function Cart(props) {
 	const cartCTX = useContext(cartContext);
 	const hasItems = cartCTX.cartItems.length > 0 ? true : false;
-	const totalAmount = (cartCTX.totalAmount).toFixed(2);
+	const totalAmount = cartCTX.totalAmount.toFixed(2);
 
-	const deleteItem = ID => {};
+	const deleteItem = (ID) => {};
+
+	const reduceItemHandler = () => {};
 
 	return (
 		<Modal show={props.cartDisplay} onHide={props.onClose} centered fullscreen>
@@ -35,6 +37,16 @@ export default function Cart(props) {
 						</thead>
 						<tbody>
 							{cartCTX.cartItems.map((item, index) => {
+								// Here we are already mapping the items in cart, if + is clicked then we can simply create the item object again
+								// and trigger the addItem method on cartcontext provider.
+								const cartItem = {
+									ID: item.ID,
+									name: item.name,
+									image: item.image,
+									price: item.price,
+									quantity: 1,
+								}
+
 								return (
 									<tr key={index}>
 										<th scope='row'>
@@ -43,14 +55,28 @@ export default function Cart(props) {
 												className={styles.thumbnail}
 											></Image>
 										</th>
-										<td className='align-middle'>{item.name} <small className="text-secondary">x {item.quantity}</small></td>
+										<td className='align-middle'>
+											{item.name}{" "}
+											<small className='text-secondary'>
+												x {item.quantity}
+											</small>
+										</td>
 										<td className='align-middle'>{item.price}</td>
 										<td className='align-middle'>
-											<QuantitySelector />
+											<QuantitySelector
+												addItem={()=>{cartCTX.addItem(cartItem)}}
+												reduceItem={reduceItemHandler}
+											/>
 										</td>
-										<td className='align-middle'> ${(item.price * item.quantity).toFixed(2)}</td>
 										<td className='align-middle'>
-											<Nav.Link onClick={() => deleteItem(item.ID)} className="link-danger">
+											{" "}
+											${(item.price * item.quantity).toFixed(2)}
+										</td>
+										<td className='align-middle'>
+											<Nav.Link
+												onClick={() => deleteItem(item.ID)}
+												className='link-danger'
+											>
 												{
 													<svg
 														xmlns='http://www.w3.org/2000/svg'

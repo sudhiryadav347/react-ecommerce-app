@@ -5,7 +5,6 @@ import styles from "./HeaderCounter.module.css";
 
 export default function HeaderCounter(props) {
 	const cartCTX = useContext(cartContext);
-	console.log(cartCTX.cartItems);
 	const numberOfCartItems = cartCTX.cartItems.reduce((curNumber, item)=> curNumber + item.quantity ,0);
 
 	return (

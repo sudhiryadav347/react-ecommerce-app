@@ -15,6 +15,7 @@ const QuantitySelector = React.forwardRef((props, ref) => {
 		setState((prevState) => {
 			return { value: prevState.value + 1 };
 		});
+		props.addItem();
 	};
 
 	const decrement = (event) => {

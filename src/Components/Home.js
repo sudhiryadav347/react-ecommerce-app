@@ -33,7 +33,6 @@ const Home = (props) => {
 							price: product.price,
 							quantity: Quantity,
 						});
-						console.log('cartCTX.cartItems', cartCTX.cartItems);
 					};
 
 					return (
