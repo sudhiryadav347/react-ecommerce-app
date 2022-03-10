@@ -1,20 +1,15 @@
 import React, { useContext } from "react";
-import {
-	Modal,
-	Nav,
-	Button,
-	Container,
-	Row,
-	Image,
-} from "react-bootstrap";
+import { Modal, Nav, Button, Container, Row, Image } from "react-bootstrap";
 import styles from "./Cart.module.css";
 import QuantitySelector from "../UI/QuantitySelector/QuantitySelector";
 import cartContext from "../Context/cart-context";
 
 export default function Cart(props) {
 	const cartCTX = useContext(cartContext);
+	const hasItems = cartCTX.cartItems.length > 0 ? true : false;
+	const totalAmount = (cartCTX.totalAmount).toFixed(2);
 
-	const deleteItem = (ID) => {};
+	const deleteItem = ID => {};
 
 	return (
 		<Modal show={props.cartDisplay} onHide={props.onClose} centered fullscreen>
@@ -48,14 +43,14 @@ export default function Cart(props) {
 												className={styles.thumbnail}
 											></Image>
 										</th>
-										<td className='align-middle'>{item.name}</td>
+										<td className='align-middle'>{item.name} <small className="text-secondary">x {item.quantity}</small></td>
 										<td className='align-middle'>{item.price}</td>
 										<td className='align-middle'>
 											<QuantitySelector />
 										</td>
-										<td className='align-middle'></td>
+										<td className='align-middle'> ${(item.price * item.quantity).toFixed(2)}</td>
 										<td className='align-middle'>
-											<Nav.Link onClick={() => deleteItem(item.ID)}>
+											<Nav.Link onClick={() => deleteItem(item.ID)} className="link-danger">
 												{
 													<svg
 														xmlns='http://www.w3.org/2000/svg'
@@ -80,7 +75,7 @@ export default function Cart(props) {
 								<td></td>
 								<td>Footer</td>
 								<td>Footer</td>
-								<td></td>
+								<td>${totalAmount}</td>
 							</tr>
 						</tfoot>
 					</table>
@@ -90,8 +85,8 @@ export default function Cart(props) {
 				<Button variant='secondary' onClick={props.onClose}>
 					Close
 				</Button>
-				<Button variant='primary' onClick={props.onClose}>
-					Save Changes
+				<Button variant='danger' onClick={props.onClose} disabled={!hasItems}>
+					Proceed to checkout
 				</Button>
 			</Modal.Footer>
 		</Modal>

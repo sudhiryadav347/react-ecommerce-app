@@ -2,18 +2,23 @@
 import React, { useState } from "react";
 import "./QuantitySelector.scss";
 
-export default function QuantitySelector(props) {
+// Use forwardref on our custom component to pass from parent
+// https://reactjs.org/docs/forwarding-refs.html
+
+const QuantitySelector = React.forwardRef((props, ref) => {
 	const [State, setState] = useState({
 		value: 1,
 	});
 
-	const increment = () => {
+	const increment = (event) => {
+		event.preventDefault();
 		setState((prevState) => {
 			return { value: prevState.value + 1 };
 		});
 	};
 
-	const decrement = () => {
+	const decrement = (event) => {
+		event.preventDefault();
 		setState((prevState) => {
 			return { value: prevState.value > 1 ? prevState.value - 1 : 1 };
 		});
@@ -25,6 +30,7 @@ export default function QuantitySelector(props) {
 				<button
 					className='quantity-input__modifier quantity-input__modifier--left'
 					onClick={decrement}
+					type='input'
 				>
 					&mdash;
 				</button>
@@ -32,15 +38,19 @@ export default function QuantitySelector(props) {
 					className='quantity-input__screen'
 					type='text'
 					value={State.value}
+					ref={ref}
 					readOnly
 				/>
 				<button
 					className='quantity-input__modifier quantity-input__modifier--right'
 					onClick={increment}
+					type='input'
 				>
 					&#xff0b;
 				</button>
 			</div>
 		</div>
 	);
-}
+});
+
+export default QuantitySelector;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Col } from "react-bootstrap";
 import { Card } from "react-bootstrap";
-import Addtocart from "./Products/Addtocart";
+import Addtocart from "./Products/AddtocartForm";
 import Productrow from "./Products/Productrow";
 import axios from "axios";
 import Rate from "./UI/Rate";
@@ -10,7 +10,6 @@ import cartContext from "./Context/cart-context";
 const Home = (props) => {
 	const [ProductData, setProductData] = useState([]);
 	const cartCTX = useContext(cartContext);
-
 	useEffect(() => {
 		axios.get("https://fakestoreapi.com/products").then(function (response) {
 			// handle success
@@ -26,11 +25,15 @@ const Home = (props) => {
 			{
 				// Using array.map to iterate through product data.
 				ProductData.map((product, index) => {
-					const productProp = {
-						ID: product.id,
-						name: product.title,
-						image: product.image,
-						price: product.price,
+					const onAddToCartHandler = (Quantity) => {
+						cartCTX.addItem({
+							ID: product.id,
+							name: product.title,
+							image: product.image,
+							price: product.price,
+							quantity: Quantity,
+						});
+						console.log('cartCTX.cartItems', cartCTX.cartItems);
 					};
 
 					return (
@@ -50,10 +53,7 @@ const Home = (props) => {
 									</Card.Text>
 									Rate: {product.rating.rate}
 									<Rate value={product.rating.rate} />
-									<Addtocart
-										ProductDetails={productProp}
-										addItemtoCart={cartCTX.addItem}
-									/>
+									<Addtocart onAddToCart={onAddToCartHandler} />
 								</Card.Body>
 							</Card>
 						</Col>
