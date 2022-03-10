@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Col } from "react-bootstrap";
 import { Card } from "react-bootstrap";
-import Addtocart from "./Products/AddtocartForm";
+import AddtocartForm from "./Products/AddtocartForm";
 import Productrow from "./Products/Productrow";
 import axios from "axios";
 import Rate from "./UI/Rate";
@@ -52,7 +52,7 @@ const Home = (props) => {
 									</Card.Text>
 									Rate: {product.rating.rate}
 									<Rate value={product.rating.rate} />
-									<Addtocart onAddToCart={onAddToCartHandler} />
+									<AddtocartForm onAddToCart={onAddToCartHandler} />
 								</Card.Body>
 							</Card>
 						</Col>

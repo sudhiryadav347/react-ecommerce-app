@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import QuantitySelector from "../UI/QuantitySelector/QuantitySelector";
 
-const Addtocart = (props) => {
+const AddtocartForm = (props) => {
 	const [isValidQTY, setisValidQTY] = useState(true);
 	const [Label, setLabel] = useState("Add to Cart");
 	const [isLoading, setisLoading] = useState(false);
@@ -49,9 +49,9 @@ const Addtocart = (props) => {
 					</Col>
 				</Row>
 			</Form>
-			{!isValidQTY && <p className="text-danger"><small>Amount is invalid</small></p>}
+			{!isValidQTY && <p className="text-danger"><small>Max QTY allowed is 5</small></p>}
 		</div>
 	);
 };
 
-export default Addtocart;
+export default AddtocartForm;
