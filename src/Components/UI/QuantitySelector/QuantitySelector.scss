@@ -1,0 +1,58 @@
+$block: ".quantity-input";
+$border: 0 solid #dbdbdb;
+$border-radius: 0px;
+$color--primary: #f3f3f3;
+$modifier--text-color: #888;
+
+#{$block} {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+
+	&:focus {
+		background: red;
+	}
+}
+
+#{$block}__modifier,
+#{$block}__screen {
+	user-select: none;
+	outline: none;
+}
+
+#{$block}__modifier {
+	padding: 0.3rem;
+	width: 1.5rem;
+	font-size: 0.8rem;
+
+	background: $color--primary;
+	color: $modifier--text-color;
+	border: $border;
+	text-align: center;
+
+	cursor: pointer;
+
+	&:hover {
+		background: darken($color--primary, 10%);
+		color: darken($modifier--text-color, 20%);
+	}
+
+	&--left {
+		border-radius: 0;
+	}
+
+	&--right {
+		border-radius: 0;
+	}
+}
+
+#{$block}__screen {
+	width: 2rem;
+	padding: 0rem;
+	font-size: 1rem;
+
+	border: 0;
+	border-top: $border;
+	border-bottom: $border;
+	text-align: center;
+}

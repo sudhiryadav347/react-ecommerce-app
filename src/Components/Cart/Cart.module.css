@@ -1,0 +1,16 @@
+.thumbnail{
+    width: 50px;
+}
+
+.CartRow{
+    padding: 15px;
+    border-bottom: 1px solid #ececec;
+}
+
+.FinalRow{
+        border-bottom-color: white;
+}
+
+.FinalRow tr td{
+    padding-top: 25px;
+}

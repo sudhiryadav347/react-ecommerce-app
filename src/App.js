@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { Row } from "react-bootstrap";
-import Cartcounter from "./Components/UI/Cartcounter";
+import Cart from "./Components/Cart/Cart";
 import Navigationbar from "./Components/UI/NavigationBar";
 import Logo from "./Components/UI/Logo";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -12,21 +12,30 @@ import Dashboard from "./Components/Dashboard";
 import Pagenotfound from "./Components/Pagenotfound";
 import Signup from "./Components/Signup";
 import AuthContext from "./Components/Context/auth-context";
+import HeaderCounter from "./Components/HeaderCounter/HeaderCounter";
+import CartProvider from "./Components/Context/CartProvider";
 
 const App = () => {
-	const [cartCount, setcartCount] = useState(0);
-	const cartContentCounterHandler = (data) => {
-		setcartCount(data);
-	};
+
+	const [ShowCart, setShowCart] = useState(false);
 	const authCTX = useContext(AuthContext);
 
+	const handleShow = () => {
+		setShowCart(true);
+	};
+
+	const handleClose = () => {
+		setShowCart(false)
+	}
+
 	return (
-		<React.Fragment>
+		<CartProvider>
 			<header className='App-header'>
 				<Container className='p-3'>
 					<Row>
 						<Logo />
-						<Cartcounter itemCount={cartCount} />
+						<HeaderCounter onClick={ handleShow }/>
+						<Cart cartDisplay={ShowCart} onClose={handleClose}/>
 					</Row>
 				</Container>
 			</header>
@@ -36,7 +45,7 @@ const App = () => {
 					<Route path='about' element={<About />} />
 					<Route
 						path='/'
-						element={<Home cartContentCounter={cartContentCounterHandler} />}
+						element={<Home />}
 					/>
 					{!authCTX.isLoggedIn && (
 						<>
@@ -54,7 +63,7 @@ const App = () => {
 					<Route path='*' element={<Pagenotfound />} />
 				</Routes>
 			</Container>
-		</React.Fragment>
+		</ CartProvider>
 	);
 };
 
