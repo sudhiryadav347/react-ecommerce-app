@@ -9,9 +9,6 @@ export default function Cart(props) {
 	const hasItems = cartCTX.cartItems.length > 0 ? true : false;
 	const totalAmount = cartCTX.totalAmount.toFixed(2);
 
-	const deleteItem = (ID) => {};
-
-	const reduceItemHandler = () => {};
 
 	return (
 		<Modal show={props.cartDisplay} onHide={props.onClose} centered fullscreen>
@@ -64,17 +61,19 @@ export default function Cart(props) {
 										<td className='align-middle'>{item.price}</td>
 										<td className='align-middle'>
 											<QuantitySelector
-												addItem={()=>{cartCTX.addItem(cartItem)}}
-												reduceItem={reduceItemHandler}
+												addItem={()=>cartCTX.addItem(cartItem)}
+												reduceItem={()=>cartCTX.removeItem(item.ID)}
+												value={item.quantity}
+												min={1}
+												max={5}
 											/>
 										</td>
 										<td className='align-middle'>
-											{" "}
 											${(item.price * item.quantity).toFixed(2)}
 										</td>
 										<td className='align-middle'>
 											<Nav.Link
-												onClick={() => deleteItem(item.ID)}
+												onClick={() => cartCTX.deleteItem(item.ID)}
 												className='link-danger'
 											>
 												{

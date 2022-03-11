@@ -6,8 +6,10 @@ import "./QuantitySelector.scss";
 // https://reactjs.org/docs/forwarding-refs.html
 
 const QuantitySelector = React.forwardRef((props, ref) => {
+
+	const defaultValue = (props.value ? props.value : 1)
 	const [State, setState] = useState({
-		value: 1,
+		value: defaultValue,
 	});
 
 	const increment = (event) => {
@@ -15,7 +17,7 @@ const QuantitySelector = React.forwardRef((props, ref) => {
 		setState((prevState) => {
 			return { value: prevState.value + 1 };
 		});
-		props.addItem();
+		if(props.addItem) props.addItem();
 	};
 
 	const decrement = (event) => {
@@ -23,6 +25,7 @@ const QuantitySelector = React.forwardRef((props, ref) => {
 		setState((prevState) => {
 			return { value: prevState.value > 1 ? prevState.value - 1 : 1 };
 		});
+		if(props.reduceItem) props.reduceItem();
 	};
 
 	return (
@@ -41,6 +44,8 @@ const QuantitySelector = React.forwardRef((props, ref) => {
 					value={State.value}
 					ref={ref}
 					readOnly
+					min={(props.min) && props.min}
+					max={(props.max) && props.min}
 				/>
 				<button
 					className='quantity-input__modifier quantity-input__modifier--right'

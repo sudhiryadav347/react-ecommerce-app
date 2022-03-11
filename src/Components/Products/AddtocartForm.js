@@ -29,10 +29,9 @@ const AddtocartForm = (props) => {
 			setisValidQTY(false);
 			return;
 		}
-		
+
 		setisValidQTY(true);
 		props.onAddToCart(enteredQuantityNumber);
-
 	};
 
 	return (
@@ -40,6 +39,7 @@ const AddtocartForm = (props) => {
 			<Form onSubmit={AddedToCart}>
 				<Row>
 					<Col className='align-middle'>
+						{/* TODO: After adding to the cart reset the quantity selector to 1 */}
 						<QuantitySelector ref={quantityInputRef} />
 					</Col>
 					<Col>
@@ -49,7 +49,11 @@ const AddtocartForm = (props) => {
 					</Col>
 				</Row>
 			</Form>
-			{!isValidQTY && <p className="text-danger"><small>Max QTY allowed is 5</small></p>}
+			{!isValidQTY && (
+				<p className='text-danger'>
+					<small>Max QTY allowed is 5</small>
+				</p>
+			)}
 		</div>
 	);
 };
