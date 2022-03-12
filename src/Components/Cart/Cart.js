@@ -9,7 +9,7 @@ export default function Cart(props) {
 	const hasItems = cartCTX.cartItems.length > 0 ? true : false;
 	const totalAmount = cartCTX.totalAmount.toFixed(2);
 
-
+	if(cartCTX.cartItems.length > 0 ){
 	return (
 		<Modal show={props.cartDisplay} onHide={props.onClose} centered fullscreen>
 			<Modal.Header closeButton>
@@ -42,7 +42,7 @@ export default function Cart(props) {
 									image: item.image,
 									price: item.price,
 									quantity: 1,
-								}
+								};
 
 								return (
 									<tr key={index}>
@@ -61,8 +61,8 @@ export default function Cart(props) {
 										<td className='align-middle'>{item.price}</td>
 										<td className='align-middle'>
 											<QuantitySelector
-												addItem={()=>cartCTX.addItem(cartItem)}
-												reduceItem={()=>cartCTX.removeItem(item.ID)}
+												addItem={() => cartCTX.addItem(cartItem)}
+												reduceItem={() => cartCTX.removeItem(item.ID)}
 												value={item.quantity}
 												min={1}
 												max={5}
@@ -116,4 +116,29 @@ export default function Cart(props) {
 			</Modal.Footer>
 		</Modal>
 	);
+						}
+						else{
+							return (
+								<Modal show={props.cartDisplay} onHide={props.onClose} centered fullscreen>
+									<Modal.Header closeButton>
+										<Container>
+											<Row>
+												<Modal.Title className='ps-5'>Shopping Cart.</Modal.Title>
+											</Row>
+										</Container>
+									</Modal.Header>
+									<Modal.Body className='show-grid p-0'>
+										<Container>
+											<p className="mt-5">Cart is empty.</p>
+										</Container>
+									</Modal.Body>
+									<Modal.Footer className='container'>
+										<Button variant='secondary' onClick={props.onClose}>
+											Go back to shopping....
+										</Button>
+										
+									</Modal.Footer>
+								</Modal>
+							);
+						}
 }
