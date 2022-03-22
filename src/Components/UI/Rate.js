@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 const Rate = (props) => {
